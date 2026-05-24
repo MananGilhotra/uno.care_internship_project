@@ -97,28 +97,7 @@ export const Settings = () => {
         </div>
       </motion.div>
 
-      {/* API */}
-      <motion.div variants={item} className="card p-5">
-        <div className="flex items-center gap-3 mb-4">
-          <Globe size={16} className="text-[var(--text-muted)]" />
-          <h3 className="text-sm font-semibold">API Configuration</h3>
-        </div>
-        <div className="space-y-3">
-          <div>
-            <label className="text-[12px] font-medium text-[var(--text-muted)] uppercase tracking-wide">Base URL</label>
-            <div className="mt-1 font-mono text-[13px] bg-[var(--bg-tertiary)] rounded-lg px-3 py-2 border">
-              http://localhost:8080/api/v1
-            </div>
-          </div>
-          <div>
-            <label className="text-[12px] font-medium text-[var(--text-muted)] uppercase tracking-wide">Status</label>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="text-[13px] font-medium text-emerald-600 dark:text-emerald-400">Connected</span>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+
 
       {/* Notifications */}
       <motion.div variants={item} className="card p-5">
