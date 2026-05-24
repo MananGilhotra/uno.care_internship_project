@@ -110,8 +110,8 @@ Whether you're managing feature flags, environment-specific settings, or securit
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/configvault.git
-cd configvault
+git clone https://github.com/MananGilhotra/uno.care_internship_project.git
+cd uno.care_internship_project
 ```
 
 ### 2️⃣ Database Setup
@@ -557,9 +557,9 @@ You may obtain a copy of the License at
 ## 👤 Author
 
 <!-- Replace with your information -->
-- **Name**: Your Name
-- **GitHub**: [@your-username](https://github.com/your-username)
-- **LinkedIn**: [Your Name](https://linkedin.com/in/your-username)
+- **Name**: Manan Gilhotra
+- **GitHub**: [@MananGilhotra](https://github.com/MananGilhotra)
+- **LinkedIn**: [Manan Gilhotra](https://linkedin.com/in/manangilhotra)
 
 ---
 
