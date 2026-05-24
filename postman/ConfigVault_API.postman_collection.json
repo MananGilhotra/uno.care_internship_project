@@ -1,0 +1,297 @@
+{
+  "info": {
+    "_postman_id": "configvault-api-collection",
+    "name": "ConfigVault API",
+    "description": "Complete API collection for ConfigVault — a centralized configuration management service built with Spring Boot 2.7 and Java 8.\n\nBase URL: http://localhost:8080\n\nFeatures tested:\n- CRUD operations on configuration properties\n- Restricted key protection (JWT_SECRET, SWAGGER_PASSWORD, etc.)\n- Soft delete with is_active flag\n- Pagination and category filtering\n- Value masking for sensitive keys",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/actuator/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["actuator", "health"]
+        },
+        "description": "Verify the application is running and healthy."
+      },
+      "response": [
+        {
+          "name": "Healthy Response",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"status\": \"UP\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Property",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"key\": \"APP_NAME\",\n  \"value\": \"ConfigVault\",\n  \"category\": \"APPLICATION\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties"]
+        },
+        "description": "Create a new configuration property. If the key already exists, it will be updated."
+      },
+      "response": [
+        {
+          "name": "Created Successfully",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Property created successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"key\": \"APP_NAME\",\n    \"value\": \"ConfigVault\",\n    \"category\": \"APPLICATION\",\n    \"isActive\": true,\n    \"isRestricted\": false,\n    \"createdDate\": \"2026-01-01T00:00:00\",\n    \"lastModifiedDate\": \"2026-01-01T00:00:00\"\n  },\n  \"status\": 201,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Property",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"key\": \"APP_NAME\",\n  \"value\": \"ConfigVault-v2\",\n  \"category\": \"APPLICATION\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties"]
+        },
+        "description": "Update an existing property by posting the same key with a new value."
+      },
+      "response": [
+        {
+          "name": "Updated Successfully",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Property updated successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"key\": \"APP_NAME\",\n    \"value\": \"ConfigVault-v2\",\n    \"category\": \"APPLICATION\",\n    \"isActive\": true,\n    \"isRestricted\": false\n  },\n  \"status\": 201,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Property by Key",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties/APP_NAME",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties", "APP_NAME"]
+        },
+        "description": "Retrieve a single property by its key name."
+      },
+      "response": [
+        {
+          "name": "Property Found",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Property retrieved successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"key\": \"APP_NAME\",\n    \"value\": \"ConfigVault\",\n    \"category\": \"APPLICATION\",\n    \"isActive\": true,\n    \"isRestricted\": false,\n    \"createdDate\": \"2026-01-01T00:00:00\",\n    \"lastModifiedDate\": \"2026-01-01T00:00:00\"\n  },\n  \"status\": 200,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Active Properties",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties?page=0&size=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties"],
+          "query": [
+            {
+              "key": "page",
+              "value": "0",
+              "description": "Page number (0-indexed)"
+            },
+            {
+              "key": "size",
+              "value": "10",
+              "description": "Number of items per page"
+            }
+          ]
+        },
+        "description": "Retrieve a paginated list of all active configuration properties."
+      },
+      "response": [
+        {
+          "name": "Paginated List",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Properties retrieved successfully\",\n  \"data\": {\n    \"content\": [\n      {\n        \"id\": 1,\n        \"key\": \"APP_NAME\",\n        \"value\": \"ConfigVault\",\n        \"category\": \"APPLICATION\",\n        \"isActive\": true,\n        \"isRestricted\": false\n      }\n    ],\n    \"pageNumber\": 0,\n    \"pageSize\": 10,\n    \"totalElements\": 15,\n    \"totalPages\": 2,\n    \"last\": false\n  },\n  \"status\": 200,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Filter by Category",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties/category/APPLICATION?page=0&size=10",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties", "category", "APPLICATION"],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Retrieve properties filtered by category (case-insensitive)."
+      },
+      "response": [
+        {
+          "name": "Filtered Results",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Properties retrieved successfully\",\n  \"data\": {\n    \"content\": [\n      {\n        \"id\": 1,\n        \"key\": \"APP_NAME\",\n        \"value\": \"ConfigVault\",\n        \"category\": \"APPLICATION\",\n        \"isActive\": true\n      }\n    ],\n    \"pageNumber\": 0,\n    \"pageSize\": 10,\n    \"totalElements\": 5,\n    \"totalPages\": 1,\n    \"last\": true\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Soft Delete Property",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties/LOG_LEVEL",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties", "LOG_LEVEL"]
+        },
+        "description": "Soft-delete a property by setting its is_active flag to false. The record is not physically removed."
+      },
+      "response": [
+        {
+          "name": "Deleted Successfully",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Property 'LOG_LEVEL' has been deactivated\",\n  \"data\": null,\n  \"status\": 200,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Restricted Key (Masked Value)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties/JWT_SECRET",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties", "JWT_SECRET"]
+        },
+        "description": "Retrieve a restricted/sensitive key. The value will be masked with ******** for security."
+      },
+      "response": [
+        {
+          "name": "Masked Value",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Property retrieved successfully\",\n  \"data\": {\n    \"id\": 10,\n    \"key\": \"JWT_SECRET\",\n    \"value\": \"********\",\n    \"category\": \"SECURITY\",\n    \"isActive\": true,\n    \"isRestricted\": true\n  },\n  \"status\": 200,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Try Delete Restricted Key (403)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties/JWT_SECRET",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties", "JWT_SECRET"]
+        },
+        "description": "Attempt to delete a restricted key. This should return a 403 Forbidden response."
+      },
+      "response": [
+        {
+          "name": "Forbidden",
+          "status": "Forbidden",
+          "code": 403,
+          "body": "{\n  \"success\": false,\n  \"message\": \"The key 'JWT_SECRET' is restricted and cannot be modified or deleted\",\n  \"data\": null,\n  \"status\": 403,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Try Update Restricted Key (403)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"key\": \"JWT_SECRET\",\n  \"value\": \"new-secret-value\",\n  \"category\": \"SECURITY\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties"]
+        },
+        "description": "Attempt to create/update a restricted key. This should return a 403 Forbidden response."
+      },
+      "response": [
+        {
+          "name": "Forbidden",
+          "status": "Forbidden",
+          "code": 403,
+          "body": "{\n  \"success\": false,\n  \"message\": \"The key 'JWT_SECRET' is restricted and cannot be modified or deleted\",\n  \"data\": null,\n  \"status\": 403,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Categories",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/properties/categories",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "properties", "categories"]
+        },
+        "description": "Retrieve a list of all distinct active property categories."
+      },
+      "response": [
+        {
+          "name": "Category List",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Categories retrieved successfully\",\n  \"data\": [\n    \"APPLICATION\",\n    \"DATABASE\",\n    \"FEATURE\",\n    \"SECURITY\"\n  ],\n  \"status\": 200,\n  \"timestamp\": \"2026-01-01T00:00:00\"\n}"
+        }
+      ]
+    }
+  ]
+}

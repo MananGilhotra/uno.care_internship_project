@@ -1,0 +1,62 @@
+# =============================================================================
+# ConfigVault - Default Application Configuration
+# =============================================================================
+# This file contains the default configuration properties for ConfigVault.
+# Profile-specific overrides are in application-{profile}.yml files.
+# =============================================================================
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ConfigVault
+  profiles:
+    active: dev
+
+  # JPA / Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Jackson Serialization Configuration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+# SpringDoc / Swagger Configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# Logging Configuration
+logging:
+  level:
+    com.configvault: INFO
+    org.springframework: WARN
+
+# Application Custom Properties
+app:
+  version: 1.0.0
+  rate-limit:
+    capacity: 20
+    refill-tokens: 20
+    refill-duration-seconds: 60

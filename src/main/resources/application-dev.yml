@@ -1,0 +1,31 @@
+# =============================================================================
+# ConfigVault - Development Profile Configuration
+# =============================================================================
+# MySQL database configuration for local development environment.
+# Activate with: --spring.profiles.active=dev
+# =============================================================================
+
+spring:
+  # MySQL DataSource Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/configvault_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA Configuration Overrides
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+
+  # SQL Initialization
+  sql:
+    init:
+      mode: always
+
+# Logging Configuration - Verbose for Development
+logging:
+  level:
+    com.configvault: DEBUG
