@@ -8,6 +8,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -185,5 +186,18 @@ public class GlobalExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR.value()
         );
         return new ResponseEntity<ApiResponse<?>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Handles {@link NoResourceFoundException} when a static resource is not found (e.g., hitting the root URL).
+     *
+     * @param ex the exception
+     * @return a 404 response
+     */
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiResponse<?>> handleNoResourceFoundException(NoResourceFoundException ex) {
+        log.warn("Static resource not found: {}", ex.getMessage());
+        ApiResponse<?> response = ApiResponse.error("Not Found", HttpStatus.NOT_FOUND.value());
+        return new ResponseEntity<ApiResponse<?>>(response, HttpStatus.NOT_FOUND);
     }
 }

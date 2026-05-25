@@ -561,10 +561,3 @@ You may obtain a copy of the License at
 - **GitHub**: [@MananGilhotra](https://github.com/MananGilhotra)
 - **LinkedIn**: [Manan Gilhotra](https://linkedin.com/in/manangilhotra)
 
----
-
-<p align="center">
-  Made with ❤️ and ☕ using Spring Boot
-  <br/>
-  ⭐ Star this repo if you found it helpful!
-</p>
