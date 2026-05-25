@@ -185,8 +185,8 @@ class PropertyServiceImplTest {
         // Given
         Property restrictedProperty = new Property();
         restrictedProperty.setId(2L);
-        restrictedProperty.setKey("JWT_SECRET");
-        restrictedProperty.setValue("super-secret-jwt-key");
+        restrictedProperty.setKey("API_SECRET");
+        restrictedProperty.setValue("super-secret-api-key");
         restrictedProperty.setCategory("SECURITY");
         restrictedProperty.setIsActive(true);
         restrictedProperty.setCreatedDate(LocalDateTime.now());
@@ -194,17 +194,17 @@ class PropertyServiceImplTest {
 
         PropertyResponse maskedResponse = new PropertyResponse();
         maskedResponse.setId(2L);
-        maskedResponse.setKey("JWT_SECRET");
+        maskedResponse.setKey("API_SECRET");
         maskedResponse.setValue(AppConstants.MASK_VALUE);
         maskedResponse.setCategory("SECURITY");
         maskedResponse.setIsActive(true);
         maskedResponse.setIsRestricted(true);
 
-        when(propertyRepository.findByKeyIgnoreCase("JWT_SECRET")).thenReturn(Optional.of(restrictedProperty));
+        when(propertyRepository.findByKeyIgnoreCase("API_SECRET")).thenReturn(Optional.of(restrictedProperty));
         when(propertyMapper.toResponse(restrictedProperty)).thenReturn(maskedResponse);
 
         // When
-        PropertyResponse result = propertyService.getPropertyByKey("JWT_SECRET");
+        PropertyResponse result = propertyService.getPropertyByKey("API_SECRET");
 
         // Then
         assertNotNull(result);
@@ -310,7 +310,7 @@ class PropertyServiceImplTest {
     void softDeleteProperty_RestrictedKey_ThrowsException() {
         // When & Then
         assertThrows(RestrictedKeyException.class, () ->
-                propertyService.softDeleteProperty("JWT_SECRET"));
+                propertyService.softDeleteProperty("API_SECRET"));
 
         verify(propertyRepository, never()).save(any(Property.class));
     }

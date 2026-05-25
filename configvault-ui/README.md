@@ -14,7 +14,7 @@ ConfigVault UI is a modern, enterprise-grade React application for securely mana
 - **React Hot Toast** for seamless notifications
 
 ## Key Features
-- 🔒 **Secure Authentication**: JWT-based auth with Axios interceptors for seamless token attachment.
+
 - 🛡️ **Role-Based UI**: UI intelligently adapts based on `ROLE_ADMIN` vs `ROLE_VIEWER`.
 - 🌙 **Dark/Light Mode**: Full theme support with system preference detection.
 - 🎨 **Glassmorphism Aesthetic**: Premium UI design with frosted glass panels and smooth transitions.

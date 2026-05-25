@@ -165,7 +165,7 @@ export const Dashboard = () => {
           <div className="space-y-3">
             {[
               { query: 'DATABASE_URL', count: 124 },
-              { query: 'JWT_SECRET', count: 89 },
+              { query: 'API_SECRET', count: 89 },
               { query: 'SMTP', count: 56 },
               { query: 'API_KEY', count: 42 },
               { query: 'MAX_USERS', count: 28 },

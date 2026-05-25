@@ -36,7 +36,7 @@ INSERT INTO properties (property_key, property_value, category, is_active) VALUE
     ('LOG_LEVEL',       'INFO',                              'LOGGING',     TRUE),
     ('SMTP_HOST',       'smtp.gmail.com',                    'EMAIL',       TRUE),
     ('SMTP_PORT',       '587',                               'EMAIL',       TRUE),
-    ('JWT_SECRET',      'super-secret-jwt-key-12345',        'SECURITY',    TRUE),
+    ('API_SECRET',      'super-secret-api-key-12345',        'SECURITY',    TRUE),
     ('AWS_SECRET_KEY',  'AKIAIOSFODNN7EXAMPLE',              'SECURITY',    TRUE),
     ('SWAGGER_PASSWORD','swagger-admin-pass',                'SECURITY',    TRUE)
 ON DUPLICATE KEY UPDATE property_value = VALUES(property_value);

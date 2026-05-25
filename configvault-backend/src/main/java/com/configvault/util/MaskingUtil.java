@@ -11,7 +11,7 @@ import com.configvault.constants.AppConstants;
  *
  * <p>Example usage:</p>
  * <pre>
- *     String displayValue = MaskingUtil.maskValue("JWT_SECRET", "my-secret");
+ *     String displayValue = MaskingUtil.maskValue("API_SECRET", "my-secret");
  *     // Returns "********"
  *
  *     String displayValue = MaskingUtil.maskValue("APP_NAME", "ConfigVault");

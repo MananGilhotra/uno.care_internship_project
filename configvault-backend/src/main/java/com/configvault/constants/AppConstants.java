@@ -43,7 +43,7 @@ public final class AppConstants {
     public static final Set<String> RESTRICTED_KEYS = Collections.unmodifiableSet(
             new HashSet<String>(Arrays.asList(
                     "SWAGGER_PASSWORD",
-                    "JWT_SECRET",
+                    "API_SECRET",
                     "AWS_SECRET_KEY"
             ))
     );

@@ -7,7 +7,7 @@ const logs = [
   { id: 2, action: 'PROPERTY_UPDATED', user: 'admin', details: 'Updated LOG_LEVEL → DEBUG', time: '1 hour ago', type: 'update' },
   { id: 3, action: 'LOGIN_SUCCESS', user: 'viewer', details: 'Login from 192.168.1.5', time: '2 hours ago', type: 'auth' },
   { id: 4, action: 'PROPERTY_DELETED', user: 'admin', details: 'Soft-deleted MAX_USERS', time: '5 hours ago', type: 'delete' },
-  { id: 5, action: 'ACCESS_DENIED', user: 'viewer', details: 'Attempted modify on JWT_SECRET', time: '1 day ago', type: 'security' },
+  { id: 5, action: 'ACCESS_DENIED', user: 'viewer', details: 'Attempted modify on API_SECRET', time: '1 day ago', type: 'security' },
   { id: 6, action: 'PROPERTY_CREATED', user: 'admin', details: 'Created REDIS_HOST property', time: '1 day ago', type: 'create' },
   { id: 7, action: 'LOGIN_SUCCESS', user: 'admin', details: 'Login from 10.0.0.1', time: '2 days ago', type: 'auth' },
 ];
